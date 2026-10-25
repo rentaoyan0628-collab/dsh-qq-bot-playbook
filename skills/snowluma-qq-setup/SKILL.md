@@ -176,16 +176,26 @@ ws://127.0.0.1:3001/  ，连接头带 Authorization: Bearer <wsServers 的 acces
 
 ---
 
-## 6. （可选）接进 DeepSeek Harness
+## 6. 下一步：接进 DeepSeek Harness（上桥）
 
-如果你想让 DSH 的 agent 当这个 QQ 的"人"，中间还要一层桥接（因为 DSH 不是 OneBot 客户端）。
+到这里 SnowLuma 只是把 QQ 变成了一个标准 OneBot v11 接口 —— 它不会思考。要让 DSH 当这个 QQ 背后的人，得把两边接起来。
 
-社区现成的：[Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge)（"Bridge between QQ (SnowLuma OneBot v11) and DeepSeek Harness agents"），它做的是：
+**本包只覆盖一条路：加一层 qq-bridge。**
+
+```
+QQ 客户端 → SnowLuma(3000/3001) → qq-bridge → DSH
+```
+
+桥接做的事：
 
 - 收 SnowLuma 的 WS 事件 → 整理成会话上下文 → 交给 DSH agent
 - 把 agent 的工具调用（发消息、发语音、查状态）翻译回 OneBot HTTP 动作
 
-桥接侧要配的就三样：`wsUrl`、`httpUrl`、`accessToken`（外加 DSH 的 baseUrl）。
+为什么还要夹这一层：语音转文字、管理员传话箱、管理员硬闸、跨会话摘要、成长附录、3100 网页控制台，这六件事都长在它上面（设计见同仓库 `playbook/06-custom-features.md`）。
+
+> 另一条路是给 DSH 装一个 OneBot 客户端插件、直接填 3000/3001。**本包不覆盖它** —— 我们没在那条路上实测过。只想要"能聊天"的人可以自己去找，但本包讲的、我实际在跑的都是桥接这条。
+
+下一步去读同目录的 `qq-bridge-setup`：安装六步、`config.json` 每个字段填什么、六项能力各自在哪、以及排障。
 
 ---
 

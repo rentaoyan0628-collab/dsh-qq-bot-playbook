@@ -20,13 +20,13 @@
 
 ## 快速开始
 
-### 路径 A：只想让它在 QQ 里说话（30 分钟）
+### 路径 A：让它先在 QQ 里说话
 
-1. `skills/snowluma-qq-setup` —— 装 SnowLuma，拿到 OneBot 接口
-2. 在 DSH 里装原生 QQ 插件，填 3000/3001 和 token
-3. 说一句话，有回复 → 完事
+1. `skills/snowluma-qq-setup` —— 装 SnowLuma，拿到 OneBot 接口（3000/3001）
+2. `skills/qq-bridge-setup` —— 装桥接，把它接到 DSH 上
+3. 在 QQ 里说一句，有回复 → 完事
 
-**别装桥接层**。原生插件就够了。
+桥接这一层不是装饰：本包只覆盖这条路（不做直连），后面几步——记忆、情绪、六项能力——全部长在它上面。
 
 ### 路径 B：想让它像个人（加记忆、情绪、日常）
 
@@ -49,6 +49,7 @@
 | skill | 干什么 | 通用度 |
 |---|---|---|
 | `snowluma-qq-setup` | 从零装 SnowLuma 并接上 QQ，得到 OneBot v11 接口 | ⭐⭐⭐ 通用 |
+| `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话 | ⭐⭐⭐ 通用 |
 | `dsh-plugin-suite` | 一套让 bot "像个人"的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 |
 | `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 |
 | `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 |
