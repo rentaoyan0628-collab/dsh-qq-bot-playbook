@@ -142,3 +142,14 @@ dsh plugin --profile desktop add github:Yuuyuko-uu/dsh-feiyu-mood
 → 鱼的记忆：把要记的会话点成「开」→ 正常聊
 →（可选）导入旧档案 → 扫描 → 勾选 → 导入 → 提炼
 ```
+
+---
+
+## 出处与署名
+
+这份文档由 **NOYOT** 整理编写，**不是它描述的工具的作者**。
+
+它讲的工具来自：[Yuuyuko-uu](https://github.com/Yuuyuko-uu) —— dsh-feiyu-mood（心情）与 dsh-fish-memory（记忆）。
+
+请去原作者仓库下载、按原作者文档操作；觉得好用就给原作者点个星。
+如果本文件里有说错的地方，是整理者的问题，不是原作者的问题。

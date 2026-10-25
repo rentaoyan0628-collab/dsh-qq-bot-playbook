@@ -144,3 +144,14 @@ curl -s "https://api.live.bilibili.com/room/v1/Room/getRoomInfoOld?mid=<UID>"
 # 5) 想先说一句就 queue.jsonl 追加 {"text":"..."}
 # 6) 到点：道谢 → stop.flag → 删提醒 → 汇报
 ```
+
+---
+
+## 出处与署名
+
+这份文档由 **NOYOT** 整理编写，**不是它描述的工具的作者**。
+
+它讲的工具来自：[c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll)（B 站接口）· 直播间弹幕部分依赖你自建的只读工具。
+
+请去原作者仓库下载、按原作者文档操作；觉得好用就给原作者点个星。
+如果本文件里有说错的地方，是整理者的问题，不是原作者的问题。

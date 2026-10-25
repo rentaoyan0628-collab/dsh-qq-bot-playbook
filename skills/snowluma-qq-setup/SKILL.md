@@ -241,3 +241,14 @@ get_login_info 验证 → send_private_msg 试发 → WS 看心跳
    ↓
 （可选）接 qq-bridge → 接 DSH / 你自己的 bot
 ```
+
+---
+
+## 出处与署名
+
+这份文档由 **NOYOT** 整理编写，**不是它描述的工具的作者**。
+
+它讲的工具来自：[SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) —— QQ ↔ OneBot v11 运行时。
+
+请去原作者仓库下载、按原作者文档操作；觉得好用就给原作者点个星。
+如果本文件里有说错的地方，是整理者的问题，不是原作者的问题。

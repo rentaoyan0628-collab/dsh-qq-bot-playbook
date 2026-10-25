@@ -1,8 +1,40 @@
 # dsh-qq-bot-playbook
 
-给 **DeepSeek Harness** 做一个能聊天、能记事、能办事的 QQ 机器人——把我们踩过的坑写下来，省你几个月。
+给 **DeepSeek Harness** 做一个能聊天、能记事、能办事的 QQ 机器人——把踩过的坑写下来，省你几个月。
 
 不是框架，不是代码库，是**一整套实践笔记**：能直接用的 skill、要按环境改的 skill、以及"原生没有的能力该怎么设计"的经验篇。
+
+> ## 先说清楚身份
+>
+> **我不是这些插件的作者。**
+>
+> 我是一个普通用户：自己从零折腾，把用得上的插件、跑得通的流程凑成一套，记下来方便下一个新手。**所有插件、网关、工具的作者都不是我**，我只是把它们串起来了而已。
+>
+> - 装插件请去**原作者仓库**装，别从我这里装——我这里只有文档。
+> - 下面每个项目的作者都列在 [谁写了什么](#谁写了什么) 里；用起来觉得好，请去给原作者点星。
+> - 这套里"我自己写的"只有：流程的组织方式、踩坑记录、以及 `playbook/` 里的设计经验（那些是照着 [qq-bridge](https://github.com/Derpyu520/qq-bridge) 做改造时攒下来的）。
+> - 如果哪里署名错了、漏了，请开 issue 指出，我改。
+
+---
+
+## 谁写了什么
+
+| 项目 | 作者 / 仓库 | 在本套里干什么 |
+|---|---|---|
+| **SnowLuma** | [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) | 把 QQ 转成 OneBot v11 接口（第 1 层） |
+| **qq-bridge** | [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) | SnowLuma ↔ DSH 的桥接层（第 2 层） |
+| **鱼的记忆** dsh-fish-memory | [Yuuyuko-uu/dsh-fish-memory](https://github.com/Yuuyuko-uu/dsh-fish-memory) | 会淡忘的长期记忆 |
+| **鱼的心情** dsh-feiyu-mood | [Yuuyuko-uu/dsh-feiyu-mood](https://github.com/Yuuyuko-uu/dsh-feiyu-mood) | 每轮对话后判断情绪 |
+| **dsh-douyin-scroll** | [NEWJO123/dsh-douyin-scroll](https://github.com/NEWJO123/dsh-douyin-scroll) | 刷抖音、出日报 |
+| **dsh-bili-scroll** | [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) | 刷 B 站、出日报 |
+| **dsh-whale-widget** | [MeteorNOX/DeepSeek-Balance-Whale-Widget](https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget) | 桌面鲸鱼挂件（含那个"咚"的音效） |
+| **dsh-mnemon** | [omdsh-dev/dsh-mnemon](https://github.com/omdsh-dev/dsh-mnemon) | Mnemon 记忆系统（provider / source / strategy 全家桶） |
+| **dsh-ops** | [T-Auto/dsh-ops](https://github.com/T-Auto/dsh-ops) | shell / 文件等运维工具 |
+| **dsh-browser** | [ben7am1n/dsh-browser](https://github.com/ben7am1n/dsh-browser) | 浏览器控制 |
+| **ncmdump** | [taurusxin/ncmdump](https://github.com/taurusxin/ncmdump) | 网易云 .ncm 解密 |
+| **ACE Studio** | Timedomain（商业软件） | 歌声合成（不在本仓库分发，也不建议二次分发） |
+
+**DeepSeek Harness** 本体由 DeepSeek 提供，本仓库只写"怎么用它"。
 
 ---
 
@@ -46,13 +78,13 @@
 
 ## `skills/` 里有什么
 
-| skill | 干什么 | 通用度 |
-|---|---|---|
-| `snowluma-qq-setup` | 从零装 SnowLuma 并接上 QQ，得到 OneBot v11 接口 | ⭐⭐⭐ 通用 |
-| `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话 | ⭐⭐⭐ 通用 |
-| `dsh-plugin-suite` | 一套让 bot "像个人"的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 |
-| `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 |
-| `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 |
+| skill | 干什么 | 通用度 | 基于谁 |
+|---|---|---|---|
+| `snowluma-qq-setup` | 从零装 SnowLuma 并接上 QQ，得到 OneBot v11 接口 | ⭐⭐⭐ 通用 | SnowLuma |
+| `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话 | ⭐⭐⭐ 通用 | qq-bridge |
+| `dsh-plugin-suite` | 一套让 bot "像个人"的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 | 多个插件 |
+| `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 | Yuuyuko-uu |
+| `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 | NEWJO123 |
 
 ## `skills-adapt/` 里有什么
 
@@ -62,6 +94,8 @@
 | `bili-live-hangout` | 去 B 站直播间挂着陪聊：找房间、发弹幕、收弹幕、判断该不该接话 | 权限名单、脚本路径 |
 | `qq-admin-relay` | 管理员把本机任务转交给 DSH；代发私信给指定好友 | 白名单、工具名 |
 | `qq-private-on-demand-share` | 跨会话口风纪律：自己人之间记得住，引用必须带名字，不主动播报 | 框架通用，具体规则按你的信任模型改 |
+
+这四个不含别人的代码，是我自己攒的实践；但里面的行为规范依赖上面那些插件，缺了它们用不了。
 
 ---
 
@@ -77,16 +111,21 @@
 
 ## 致谢
 
-这些人和项目让这套东西能成立：
+按贡献大小不排，按字母排大概也排不出什么，就按用到的顺序：
 
-- [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) —— QQ ↔ OneBot v11 的互操作运行时
-- [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) —— QQ 与 DSH agent 之间的桥接层
-- [Yuuyuko-uu/dsh-feiyu-mood](https://github.com/Yuuyuko-uu/dsh-feiyu-mood) / [dsh-fish-memory](https://github.com/Yuuyuko-uu/dsh-fish-memory) —— 心情与记忆
-- [NEWJO123/dsh-douyin-scroll](https://github.com/NEWJO123/dsh-douyin-scroll) —— 抖音刷视频
-- [taurusxin/ncmdump](https://github.com/taurusxin/ncmdump) —— 网易云 .ncm 解密
-- ACE Studio —— 歌声合成（商业软件，不在本仓库分发）
+- [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) —— QQ ↔ OneBot v11 的互操作运行时。没有它，整件事从第一步就不成立。
+- [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) —— QQ 与 DSH agent 之间的桥接层。`playbook/` 里那六项能力全是照着它的结构改出来的。
+- [Yuuyuko-uu](https://github.com/Yuuyuko-uu) —— dsh-feiyu-mood（心情）与 dsh-fish-memory（记忆）。这两个是"像个人"的源头。
+- [NEWJO123/dsh-douyin-scroll](https://github.com/NEWJO123/dsh-douyin-scroll) —— 抖音刷视频。
+- [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) —— B 站刷视频。
+- [MeteorNOX/DeepSeek-Balance-Whale-Widget](https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget) —— 鲸鱼挂件。
+- [omdsh-dev/dsh-mnemon](https://github.com/omdsh-dev/dsh-mnemon) —— Mnemon 记忆系统。
+- [T-Auto/dsh-ops](https://github.com/T-Auto/dsh-ops) —— 运维工具。
+- [ben7am1n/dsh-browser](https://github.com/ben7am1n/dsh-browser) —— 浏览器控制。
+- [taurusxin/ncmdump](https://github.com/taurusxin/ncmdump) —— 网易云 .ncm 解密。
+- **ACE Studio**（Timedomain）—— 歌声合成。商业软件，不在本仓库分发。
 
-本仓库只包含**文档和实践笔记**，不含上述任何项目的代码。
+本仓库只包含**文档和实践笔记**，不含上述任何项目的代码。所有插件的版权归各自作者。
 
 ---
 

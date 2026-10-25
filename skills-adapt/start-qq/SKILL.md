@@ -176,3 +176,14 @@ ACE 点歌另有一层：CLI 报 `could not connect to ACE Studio at \\.\pipe\ac
 - 不要弹出 SnowLuma / 桥接 / GPT / worker 的可见窗口。
 - 不要在端口已全部就绪时重复启动服务。
 - 不要用 `acestudio-cli app launch` 当作真的把 ACE 开起来。
+
+---
+
+## 出处与署名
+
+这份文档由 **NOYOT** 整理编写，**不是它描述的工具的作者**。
+
+它讲的工具来自：[SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma)、[Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge)。
+
+请去原作者仓库下载、按原作者文档操作；觉得好用就给原作者点个星。
+如果本文件里有说错的地方，是整理者的问题，不是原作者的问题。
