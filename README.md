@@ -65,7 +65,7 @@
 |---|---|---|
 | **直接装** | `skills/` | 复制到 `~/.agents/skills/`，重启 DSH，就能用 |
 | **要改写** | `skills-adapt/` | 有参考价值，但里面全是"我这台机器"的路径和流程，得按你的环境改 |
-| **看设计** | `playbook/` | 不是代码，是六个能力的**设计取舍与坑**。交给你的 AI，让它按你的环境实现 |
+| **看设计** | `playbook/` | 不是代码，是八个主题的**设计取舍与坑**。交给你的 AI，让它按你的环境实现 |
 
 **重要**：`playbook/` 里的东西，照抄路径一定失败。正确的用法是——读完设计，把它当成需求文档发给你的 AI，让它在你机器上重做一遍。做出来和我不一样，是正常的。
 
@@ -91,7 +91,13 @@
 
 ### 路径 C：想让它能办事、还不闯祸
 
-这才是 `playbook/` 的用武之地。六个能力：语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、网页控制台。
+这才是 `playbook/` 的用武之地。前六节是能力：语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、网页控制台。后两节是**真跑起来之后才暴露的问题**：经历库（记得住人、说得清事）和运营层（少说话、省钱、换班不失忆）。
+
+| 文件 | 讲什么 |
+|---|---|
+| `playbook/06-custom-features.md` | 六个「原生没有」的能力：语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、网页控制台 |
+| `playbook/07-experience-archive.md` | 经历库：两层数据（原文 + 经历）、两种出口（摘要可对外 / 原文只给本人）、为什么不做成插件 |
+| `playbook/08-operations-layer.md` | 运营层：只允许被 @、峰价时段睡觉、换班交接 + 原文落盘、看门狗提速 |
 
 建议顺序：**先做语音转文字（见效最快）→ 再做网页控制台（不然排障靠猜）→ 然后传话箱 + 硬闸（一起做，安全模型是配套的）→ 最后摘要和成长附录（这两个是"人格"层面，可以慢慢调）**。
 
@@ -135,7 +141,7 @@
 按贡献大小不排，按字母排大概也排不出什么，就按用到的顺序：
 
 - [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) —— QQ ↔ OneBot v11 的互操作运行时。没有它，整件事从第一步就不成立。
-- [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) —— QQ 与 DSH agent 之间的桥接层。`playbook/` 里那六项能力全是照着它的结构改出来的。
+- [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) —— QQ 与 DSH agent 之间的桥接层。`playbook/` 里那些设计和能力，全是照着它的结构改出来的。
 - [Yuuyuko-uu](https://github.com/Yuuyuko-uu) —— dsh-feiyu-mood（心情）与 dsh-fish-memory（记忆）。这两个是"像个人"的源头。
 - [NEWJO123/dsh-douyin-scroll](https://github.com/NEWJO123/dsh-douyin-scroll) —— 抖音刷视频。
 - [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) —— B 站刷视频。
