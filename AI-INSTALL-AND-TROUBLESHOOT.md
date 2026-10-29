@@ -38,7 +38,7 @@
 3. 查已有组件、进程、监听端口和配置位置，记录可工作的部分。不要照抄作者电脑路径，不以视频里的端口代替现场发现。
 4. 检查所选组件当前官方依赖与版本要求。优先已有/组件自带运行时；确需额外下载、安装系统依赖时说明用途和影响。不要笼统承诺无需 Node 或 Python。
 5. 修改前备份相关配置，密钥留在本机，输出脱敏。不要杀未知进程、清除会话和记忆或覆盖用户改动。
-6. 按 [SnowLuma skill](skills/snowluma-qq-setup/SKILL.md) 完成网关，按 [桥接 skill](skills/qq-bridge-setup/SKILL.md) 完成桥接；阅读 skill 不等于安装。每一步保存真实执行结果。
+6. 按 [SnowLuma skill](skills/snowluma-qq-setup/SKILL.md) 完成网关，按 [桥接 skill](skills/qq-bridge-setup/SKILL.md) 完成桥接（要语音转文字、传话箱、跨会话摘要、3100 控制台这些再按 [完整版 skill](skills/qq-bridge-full/SKILL.md) 开）；阅读 skill 不等于安装。每一步保存真实执行结果。
 7. 配置已授权的 QQ 号、群号与管理员；不要默认全放行。需要扫码由用户自己操作，禁止代替用户通过身份验证。
 8. 先验收文字链路，额外心情、记忆、刷视频等按需求逐项装，不默认全装。需重启时说明原因，影响现有任务前征求同意。
 

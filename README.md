@@ -134,7 +134,8 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 ### 路径 A：让它先在 QQ 里说话
 
 1. `skills/snowluma-qq-setup` —— 装 SnowLuma，拿到 OneBot 接口（3000/3001）
-2. `skills/qq-bridge-setup` —— 装桥接，把它接到 DSH 上
+2. `skills/qq-bridge-setup` —— 装桥接，把它接到 DSH 上（最小可用版）
+   - 想直接要完整版（语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、3100 控制台）：读 `skills/qq-bridge-full`，两版共用同一套代码，区别在装完开了哪些功能
 3. 在 QQ 里说一句，有回复 → 完事
 
 桥接这一层不是装饰：本包只覆盖这条路（不做直连），后面几步——记忆、情绪、六项能力——全部长在它上面。
@@ -168,7 +169,8 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 | skill | 干什么 | 通用度 | 基于谁 |
 |---|---|---|---|
 | `snowluma-qq-setup` | 从零装 SnowLuma 并接上 QQ，得到 OneBot v11 接口 | ⭐⭐⭐ 通用 | SnowLuma |
-| `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话 | ⭐⭐⭐ 通用 | qq-bridge |
+| `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话（最小可用：只求能聊） | ⭐⭐⭐ 通用 | qq-bridge |
+| `qq-bridge-full` | 完整版桥接：语音转文字、管理员传话箱、管理员硬闸、跨会话摘要、成长附录、3100 网页控制台六项能力的定位与测试方法 | ⭐⭐ 通用（六项按需开） | qq-bridge |
 | `dsh-plugin-suite` | 一套让 bot "像个人"的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 | 多个插件 |
 | `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 | Yuuyuko-uu |
 | `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 | NEWJO123 |
