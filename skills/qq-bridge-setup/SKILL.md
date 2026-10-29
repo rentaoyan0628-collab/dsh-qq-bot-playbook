@@ -5,6 +5,10 @@ description: 在 SnowLuma 和 DeepSeek Harness 之间装一层 qq-bridge，把�
 
 # 上桥：把 DSH 接到 QQ 上
 
+> ⚠️ **和 `qq-bridge-full` 是二选一，不是两个插件。** 两者装的是同一套 qq-bridge 代码，区别只在装完开了哪些功能。同时装会抢 3100 端口、重复起 worker、两个控制台互相打架 —— 装之前先确认你已经装过哪个，装错了先卸再装，别并排装。
+
+要语音转文字 / 传话箱 / 跨会话摘要 / 3100 控制台就直接读 `qq-bridge-full`（内容更全，安装步骤一致），不要两份都装。
+
 ## 先搞清这一层是干什么的
 
 | | DSH 原生 QQ 插件 | qq-bridge 完整版 |

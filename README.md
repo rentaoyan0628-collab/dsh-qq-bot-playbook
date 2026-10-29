@@ -171,6 +171,8 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 | `snowluma-qq-setup` | 从零装 SnowLuma 并接上 QQ，得到 OneBot v11 接口 | ⭐⭐⭐ 通用 | SnowLuma |
 | `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话（最小可用：只求能聊） | ⭐⭐⭐ 通用 | qq-bridge |
 | `qq-bridge-full` | 完整版桥接：语音转文字、管理员传话箱、管理员硬闸、跨会话摘要、成长附录、3100 网页控制台六项能力的定位与测试方法 | ⭐⭐ 通用（六项按需开） | qq-bridge |
+
+> ⚠️ **上面这两个桥接 skill 是二选一**，装的是同一套 qq-bridge 代码，区别只在装完开了哪些功能。同时装会抢 3100 端口、重复起 worker、两个控制台互相打架。先看你已经装了哪个；装错了先卸再装，不要并排装。
 | `dsh-plugin-suite` | 一套让 bot "像个人"的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 | 多个插件 |
 | `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 | Yuuyuko-uu |
 | `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 | NEWJO123 |
