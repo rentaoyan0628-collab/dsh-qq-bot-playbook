@@ -52,6 +52,7 @@
 | 直接发视频，期待自动安装 | 先读仓库与文字文档；打开视频页面不等于读完视频。需要未获得的信息时说明缺口，不臆测视频步骤。 |
 | Win64 包找不到、没有启动批处理文件、只有 .sh | 区分 README、仓库首页与 Releases/Assets；确认操作系统和资产版本。Windows 可能隐藏 .bat 后缀；.sh 是另一种脚本，不通过改后缀冒充 Windows 启动文件。 |
 | PowerShell 提示 && 不是有效分隔符 | 检查终端版本；Windows PowerShell 5.1 不支持该写法。使用说明指定的终端，或拆开命令并在上一步成功后执行下一步；不是一概归因于 Node。 |
+| 技能拷进去了，会话里却不出现 | 只有落在 `~/.agents/skills/<技能名>/SKILL.md`（Windows: `C:\Users\<用户名>\.agents\skills\`）才算装；仓库里的 `skills/` 是镜像、不算。再查形状（一层目录 + SKILL.md、frontmatter 有 name/description），最后重启 DSH 新开会话看清单。`skills-adapt/` 带 `<你的用户目录>` 占位符，原样拷进去不报错但一触发就找不到文件，必须先替换再装。 |
 | AI 说安装完成，但只有 skill | 查看真实文件、依赖、插件加载记录和运行进程。没有安装证据就继续安装或报告阻塞；插件是否需重启以实际加载机制判断。 |
 | AccessToken 不知道在哪，HTTP/WS 不会填 | 读取 SnowLuma OneBot 对应端点设置；常见 HTTP 3000、WS 3001 仅为示例。分别匹配协议、实际地址、端口和凭证，检查桥接版本是否支持端点分别认证。 |
 | 进入管理页要密码，与 Token 混淆 | 先识别是 SnowLuma 管理页、QQ 桥接控制台，还是 OneBot API。管理页登录凭证、桥接控制台令牌、OneBot AccessToken、模型 API key 各不相同，不能互换。 |
