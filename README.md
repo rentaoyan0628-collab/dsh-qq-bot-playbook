@@ -63,7 +63,7 @@
 
 | 插件 | 仓库 | 干什么 |
 |---|---|---|
-| **dsh-bili-live** | [rentaoyan0628-collab/dsh-bili-live](https://github.com/rentaoyan0628-collab/dsh-bili-live) | 只读直播弹幕 / 挂机监听 / 可选自动陪聊；进哪个房间、能不能发弹幕，默认都关着，要人放行 |
+| **dsh-bili-danmaku-lite** | [rentaoyan0628-collab/dsh-bili-danmaku-lite](https://github.com/rentaoyan0628-collab/dsh-bili-danmaku-lite) | 只读直播弹幕 / 挂机监听 / 可选自动陪聊 / 可选语音转写；进哪个房间、能不能发弹幕，默认都关着，要人放行。原名叫 `dsh-bili-live`，已改名（旧包 npm 上标了 deprecated） |
 
 这是本仓库作者自己写的独立 DSH 插件（不装 QQ 也能用）。为什么分开、边界怎么划，见 [playbook/10-models-and-media.md](playbook/10-models-and-media.md) 第五节。
 

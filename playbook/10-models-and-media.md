@@ -149,7 +149,7 @@ provider「y」下没有模型「z」（可选：…）
 2. **风险不同**：往别人房间里说话，是「对外发声」，需要自己的放行名单和发送闸，不该借用 QQ 的白名单。
 3. **演化速度不同**：直播接口变得比 QQ 快，独立仓库可以自己发版，不用跟着桥接走。
 
-参考实现：[rentaoyan0628-collab/dsh-bili-live](https://github.com/rentaoyan0628-collab/dsh-bili-live)（本仓库作者自己写的独立 DSH 插件：只读弹幕、挂机、可选自动陪聊；进房与发弹幕默认都关着，要人放行）。
+参考实现：[rentaoyan0628-collab/dsh-bili-danmaku-lite](https://github.com/rentaoyan0628-collab/dsh-bili-danmaku-lite)（本仓库作者自己写的独立 DSH 插件：只读弹幕、挂机、可选自动陪聊、可选语音转写；进房与发弹幕默认都关着，要人放行。原包名 `dsh-bili-live`）。
 
 边界提醒：这类能力**不要**顺手接进 QQ 会话当作聊天素材，除非你真的想清楚了两件事 —— 转写内容会被发给模型提供方，以及「听到的」不等于「看到的」。
 
