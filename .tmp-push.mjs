@@ -1,0 +1,12 @@
+import { execFileSync } from 'node:child_process';
+const cwd='F:/OneDrive - University of Adelaide/文档/deepseek-harness/default-workspace/dsh-qq-bot-playbook';
+const out=execFileSync('git',['credential','fill'],{input:'protocol=https\nhost=github.com\n\n',encoding:'utf8',windowsHide:true});
+const tok=/password=(.+)/.exec(out)[1].trim();
+const user=/username=(.+)/.exec(out)[1].trim();
+const run=(a)=>execFileSync('git',a,{cwd,encoding:'utf8',windowsHide:true});
+run(['add','-A']);
+run(['-c','user.name='+user,'-c','user.email=345938485+'+user+'@users.noreply.github.com','commit','-m','docs: add shared-memory and model/media boundary chapters']);
+const url='https://'+user+':'+tok+'@github.com/rentaoyan0628-collab/dsh-qq-bot-playbook.git';
+const push=execFileSync('git',['push',url,'HEAD:main'],{cwd,encoding:'utf8',windowsHide:true});
+const head=run(['rev-parse','HEAD']).trim();
+console.log('HEAD '+head);console.log(push.trim());

@@ -73,6 +73,20 @@
 | 原版没演示功能、与 DSH-IM/AstrBot/NapCat 有何区别 | 先分清网关、桥接/框架、模型与插件；列出原版、可选插件、本机定制。不要声称换接入就更智能、绝不掉线或不受账号风控。 |
 | QQ 指挥电脑、改头像签名 | 普通聊天与本机任务分权；用管理员授权的受限任务接口或传话箱。身份和权限由服务端核验，不信模型自填管理员号，不为单个功能给予完全自主权。 |
 
+## 2.5 记忆、模型、媒体类问题先看这两篇
+
+上面那张表是「连不上、回不了」这一层。下面这几类问题不是链路故障，是设计层面的，直接读对应章节，不要在桥接代码里乱试：
+
+| 现象 | 先看 | 关键判断 |
+|---|---|---|
+| 群和私聊像两个人 / 换模型后像失忆 | [playbook/09-memory-sharing.md](playbook/09-memory-sharing.md) | 记忆在磁盘上、不在模型里；缺的是「取出来」这一步 |
+| 摘要都一样长、明显被截 | [playbook/09-memory-sharing.md](playbook/09-memory-sharing.md) | 从会话投影读回复有长度上限，改走事件流 |
+| 换模型后某功能没了（比如看图） | [playbook/10-models-and-media.md](playbook/10-models-and-media.md) | 各通道能力不同，换完先用一张图试一次 |
+| 图片到了但报超时 / 重复发图 | [playbook/10-models-and-media.md](playbook/10-models-and-media.md) | 「没收到回执」不等于「没送到」，不要重发 |
+| 文档、压缩包发不出去 | [playbook/10-models-and-media.md](playbook/10-models-and-media.md) | 图文两条通道不通用，要单独的文件发送路径 |
+| 它太爱说话 / 一说话连发几条 | [playbook/08-operations-layer.md](playbook/08-operations-layer.md) 与 [10](playbook/10-models-and-media.md) | 先降唤醒概率，再调发送限流 |
+
+这几类「修好」的判据都是行为验证（换会话再问一次、换模型再问一次、重启再问一次），不是看配置写没写进去。
 ## 3. 安装或修复后必须验收
 
 - QQ 已登录；网关可达，HTTP/WS 的协议、端口与认证匹配。
