@@ -4,6 +4,29 @@
 
 不是框架，不是代码库，是**一整套实践笔记**：能直接用的 skill、要按环境改的 skill、以及"原生没有的能力该怎么设计"的经验篇。
 
+## 视频对应哪一个项目？先别装错
+
+**本视频和本教程走的是 [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) 独立桥接路线：**
+
+```text
+QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
+```
+
+视频里的大肥鱼是在原版 qq-bridge 基础上继续做的本机二次开发；**不是安装原版就自动拥有视频里所有定制功能**。本仓库提供教程、skill 与设计说明，不是完整二开程序的安装包。
+
+| 容易混淆的项目 | 身份与本教程的关系 |
+|---|---|
+| [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) | **本教程采用的桥接原项目；复现本视频请从这里获取桥接代码。** |
+| [DandanLLab/dsh-channel-qq](https://github.com/DandanLLab/dsh-channel-qq) | DSH 内加载的另一条 QQ 通道路线，不是本教程的 qq-bridge。 |
+| [Aegink/dsh-channel-qq](https://github.com/Aegink/dsh-channel-qq) | 源自 Dandan 早期版本的演进项目；截至 2026-10-30，npm 非作用域包 `dsh-channel-qq@0.1.0` 指向此仓库，不是本视频的桥接二开版。 |
+
+**同用 SnowLuma / OneBot v11，不代表代码同源、安装步骤通用或记忆/权限/工具可自动继承。**“标准插件”只是接入形式，不代表官方身份或质量等级；不要用 Stars、下载量代替兼容性与安全判断。
+
+- 跟着本视频安装：选择 qq-bridge，不要因为搜索到同名/相似功能，就改装 dsh-channel-qq 或其二开版。
+- 给 AI 安装：明确指定原作者仓库；获取失败先报告，不得静默换成 channel 方案。
+- 已有任意一套在工作：先识别，不卸载、不清空数据、不叠加第二个自动响应入口；如要改路线，说明差异与迁移影响，再由用户决定。
+- 想主动选择 channel 项目当然可以，但那是另一套部署与迁移方案，本教程的 3100 控制台、会话令牌、MCP 及定制记忆不能直接照搬。
+
 ## 最推荐的用法：把仓库地址直接丢给大肥鱼
 
 **这就是做这套教程的本意：让 DSH 里的大肥鱼读仓库、按你电脑的实际环境完成安装，不用先学会手动克隆和敲命令。** 手动安装是补充，不是新手必须先过的一关。
@@ -13,6 +36,7 @@
 ```text
 请读取 https://github.com/rentaoyan0628-collab/dsh-qq-bot-playbook
 先看 README.md 和 AI-INSTALL-AND-TROUBLESHOOT.md。
+按视频的 qq-bridge 路线，从 https://github.com/Derpyu520/qq-bridge 获取桥接代码；不要自动替换为 dsh-channel-qq 或其二开版。
 根据我的电脑检查环境、安装并配置 QQ 接入，不要只解释或只读取 skill。
 保留已有能用的部分，修改前备份；需要我登录或批准权限时再问我。
 先验证普通文字连续对话，最后说明实际完成和未完成的项目。

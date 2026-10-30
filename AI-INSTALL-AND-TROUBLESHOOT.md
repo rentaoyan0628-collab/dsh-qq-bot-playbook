@@ -7,6 +7,7 @@
 ```text
 请读取 https://github.com/rentaoyan0628-collab/dsh-qq-bot-playbook
 先看 README.md 和 AI-INSTALL-AND-TROUBLESHOOT.md。
+按视频的 qq-bridge 路线，从 https://github.com/Derpyu520/qq-bridge 获取桥接代码；不要自动替换为 dsh-channel-qq 或其二开版。
 请根据我这台电脑的实际环境，把 DeepSeek Harness 接到 QQ。
 不要只学会 skill 或复述方法，要执行已授权的安装、配置、启动与测试。
 已有能工作的部分请保留；修改配置前备份，不要一上来重装。
@@ -30,6 +31,14 @@
 当前教程入口：**https://github.com/rentaoyan0628-collab/dsh-qq-bot-playbook**。
 本次 GitHub 名称调整后，新用户名地址没有正常生效；请先用旧用户名 `rentaoyan0628-collab`，不要从视频中的新名字猜 URL。改名后固定几个月不能用新地址不是通用规则，以实际访问结果为准。
 若打不开，先区分地址错误、网络问题、仓库首页与下载页位置错误；不要因为文档入口失效就重装 QQ 或 DSH。打不开正文时请用户提供文字说明，不假装已经读完。
+
+## 0.5 先确认项目，不把 channel 当成桥接替代包
+
+本视频采用 **[Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge)**，链路为 SnowLuma → 独立 qq-bridge → DSH。作者在其基础上做了本机二次开发，原版安装不等于具备全部视频定制能力。
+
+DandanLLab/dsh-channel-qq 是插件式通道，Aegink/dsh-channel-qq 是其早期版本的演进项目；截至 2026-10-30，npm 非作用域包 dsh-channel-qq@0.1.0 指向 Aegink。两者都不是本教程指定的桥接代码。详细辨别见 [README](README.md#视频对应哪一个项目先别装错)。
+
+安装 Agent 应先核对仓库来源与现有接入方式。跟随本教程时，不得因仓库打不开、名称相似或推荐插件而静默切换项目；无法获取就报告阻塞。已有 channel 或 bridge 时先保留现状，说明差异，只有用户明确选择另一条路线后再制定迁移计划，禁止直接覆盖记忆、权限或新增同会话自动响应入口。
 
 ## 1. 给执行安装的大肥鱼：先检查，再按环境安装
 

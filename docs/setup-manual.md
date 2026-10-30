@@ -9,6 +9,8 @@
 
 ---
 
+> **先确认没有装错项目：**本视频采用 [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) 独立桥接及其本机定制，不是 DandanLLab/dsh-channel-qq 或 Aegink 的 channel 二开版。即使都用 SnowLuma，也不是可直接互换的安装包。请先读 [项目辨别说明](../README.md#视频对应哪一个项目先别装错)；不要让 AI 自动改换路线，已有能用的系统先保留。
+
 ## 0. 这份文档解决什么
 
 你可能遇到这几种情况：
