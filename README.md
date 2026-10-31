@@ -27,6 +27,30 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 - 已有任意一套在工作：先识别，不卸载、不清空数据、不叠加第二个自动响应入口；如要改路线，说明差异与迁移影响，再由用户决定。
 - 想主动选择 channel 项目当然可以，但那是另一套部署与迁移方案，本教程的 3100 控制台、会话令牌、MCP 及定制记忆不能直接照搬。
 
+## 还有第三个同名项目：`dsh-qq-bridge` 插件（DSH 0.2.x 装不上，别记成本教程的账）
+
+社区里还有一个名字很像、但**完全不是同一样东西**的项目：[TomoyoNatsume/dsh-qq-bridge](https://github.com/TomoyoNatsume/dsh-qq-bridge)（npm `@yachangchang/dsh-qq-bridge`）。它是「把 OneBot 直接接进 DSH」的**插件**，不是本教程用的独立桥接程序。
+
+截至 2026-11-01，本机 DSH `0.2.1-rc.5` 上实测它装不进去，原因是**插件自身**的打包与 DSH 版本对不上：
+
+- `peerDependencies` 全部锁在 `^0.1.0-rc.8`；
+- 客户端半部声明依赖 `@deepseek-ai/dsh-client-runtime`，并使用客户端服务 `connection` / `remote` / `settingsScope`。这几样在 0.2.1 里都已移除（0.2.1 的客户端服务只有 `layout`、`locale`、`sessions`、`slots`、`theme`、`timer`、`uiWorkspace`、`workspaces`）；
+- 它宿主半部用到的那 10 个服务在 0.2.1 里全都在，所以问题出在**插件的客户端装配**，不在 OneBot 协议，也不在 SnowLuma、不在 3001 端口。
+
+两层分清就够了：
+
+| | 本教程的 qq-bridge | dsh-qq-bridge 插件 |
+|---|---|---|
+| 形态 | 独立进程（Derpyu520/qq-bridge） | DSH 插件 |
+| 接入方式 | SnowLuma 的 OneBot v11（3000/3001） | 自己连 OneBot WS（默认 `ws://127.0.0.1:3001`） |
+| 受 DSH 版本影响 | 不受，不经过插件系统 | 受影响，0.2.x 要等作者出兼容版 |
+
+所以：**「插件装不上」不等于「本教程的桥装不上」**。本教程这条路是独立进程，DSH 升到 0.2.x 照常跑；两者的失败点不在同一层，别把插件的兼容问题记到这条路线上。
+
+本教程固定使用 **SnowLuma**，不推荐改用 NapCat 复现：两套都提供 OneBot v11，但本仓库的安装步骤、白名单、3100 控制台与排障全部按 SnowLuma 写，换实现等于换掉一半环境，出了问题无法按本文档定位。
+
+确实想走「插件式直连」的话：等作者发布兼容 0.2.x 的版本，或自行去掉它的客户端半部（host-only：删掉 `dsh.client` 与 `peerDependencies`，只用 `cordis.patch.yml` 配置，代价是没有 Web 设置页）。那属于另一个项目的改动，不在本仓库范围内。
+
 ## 最推荐的用法：把仓库地址直接丢给大肥鱼
 
 **这就是做这套教程的本意：让 DSH 里的大肥鱼读仓库、按你电脑的实际环境完成安装，不用先学会手动克隆和敲命令。** 手动安装是补充，不是新手必须先过的一关。

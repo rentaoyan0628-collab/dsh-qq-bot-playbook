@@ -40,6 +40,18 @@ DandanLLab/dsh-channel-qq 是插件式通道，Aegink/dsh-channel-qq 是其早�
 
 安装 Agent 应先核对仓库来源与现有接入方式。跟随本教程时，不得因仓库打不开、名称相似或推荐插件而静默切换项目；无法获取就报告阻塞。已有 channel 或 bridge 时先保留现状，说明差异，只有用户明确选择另一条路线后再制定迁移计划，禁止直接覆盖记忆、权限或新增同会话自动响应入口。
 
+### 0.6 「桥装不上」要先分清是哪一层（`dsh-qq-bridge` 插件 vs 本教程的独立程序）
+
+[TomoyoNatsume/dsh-qq-bridge](https://github.com/TomoyoNatsume/dsh-qq-bridge)（npm `@yachangchang/dsh-qq-bridge`）是**第三方 DSH 插件**，不是本教程的 [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge)。截至 2026-11-01 在 DSH `0.2.1-rc.5` 实测：该插件激活失败，`plugin_manager` 报 `1 entry did not activate`，原因是它自身 `peerDependencies` 锁在 `^0.1.0-rc.8`、客户端半部依赖 `@deepseek-ai/dsh-client-runtime` 与客户端服务 `connection`/`remote`/`settingsScope`，而这些在 0.2.1 中已被移除（0.2.1 客户端服务只有 `layout`、`locale`、`sessions`、`slots`、`theme`、`timer`、`uiWorkspace`、`workspaces`）。它的宿主半部所需服务在 0.2.1 全部存在。
+
+判断顺序：
+
+1. 用户用的是「独立进程桥」还是「DSH 插件」——前者不经过插件系统，DSH 版本更新不影响它；
+2. 只有在插件路线下，才用 `plugin_manager list_plugins` 看 `fiberPhase` 是否 `failed`，再读诊断原文；
+3. 不要因为插件报错就判断 OneBot、SnowLuma 或 3001 端口坏了——那是三层不同的东西。
+
+本教程固定使用 SnowLuma，不推荐改用 NapCat 复现：两者都提供 OneBot v11，但白名单、3100 控制台、令牌与排障步骤均按 SnowLuma 落地，换实现等于换掉一半环境，出问题无法按本文档定位。
+
 ## 1. 给执行安装的大肥鱼：先检查，再按环境安装
 
 1. 读 [README](README.md)；本仓库只有文档和 skill，不是把全部功能打包好的软件。实际组件到原作者仓库获取，保留署名。

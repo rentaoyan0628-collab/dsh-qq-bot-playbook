@@ -28,6 +28,12 @@ description: 部署「完整版 QQ 桥接」——在 SnowLuma + DSH 之间加�
 
 本视频指定 [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge)，是独立桥接程序；作者在原版基础上继续定制，不代表原版自带所有演示功能。DandanLLab/dsh-channel-qq 及 Aegink 演进版是另一条插件式通道路线，不是本技能的安装目标。不要因同用 OneBot、名称相似或仓库访问失败而自动替换。已装任何一套时先识别并保留，未经用户选择不得切换、卸载或增加同会话响应入口。
 
+### 别把 `dsh-qq-bridge` 插件装不上，当成这套桥不行
+
+[TomoyoNatsume/dsh-qq-bridge](https://github.com/TomoyoNatsume/dsh-qq-bridge)（npm `@yachangchang/dsh-qq-bridge`）是**另一个项目**：DSH 插件，不是本教程的独立桥接程序。截至 2026-11-01，它在 DSH `0.2.1-rc.5` 上激活失败，原因是它自己的 `peerDependencies` 锁在 `^0.1.0-rc.8`，且客户端半部要 `@deepseek-ai/dsh-client-runtime` 与客户端服务 `connection`/`remote`/`settingsScope`——这些在 0.2.1 已被移除；它的宿主服务在 0.2.1 都还在。
+
+结论：那是一个插件的客户端兼容问题，与 OneBot 协议、SnowLuma、3001 端口都无关，也不影响本技能这条独立进程路线（它不经过 DSH 插件系统，所以 3100 控制台、传话箱、语音转文字照常可用）。本技能固定按 **SnowLuma** 写，不推荐换 NapCat 复现——两套都提供 OneBot v11，但白名单、3100 控制台与排障步骤全按 SnowLuma 落地，换实现等于换掉一半环境。
+
 ## 前置
 
 1. **DSH 在跑**（任意端口，脚本会自己找）
