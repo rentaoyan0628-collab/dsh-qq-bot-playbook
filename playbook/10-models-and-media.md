@@ -71,6 +71,87 @@ provider「y」下没有模型「z」（可选：…）
 | 档位命名 | 有的模型没有「off」，有的默认档不一样 | 一切以宿主目录为准，不要硬编码 |
 | 大会话 | 上下文堆到几十轮之后，某一路通道可能整轮零输出 | 老会话先摘要再开新会话，不要在巨型会话上硬扛 |
 
+### 只给某一路加温度：本地调参代理
+
+预设解决了「用哪个模型」，解决不了「同一个模型，QQ 要更活泼、别的会话要更准」。
+
+问题在于宿主（DSH）**不开放 `temperature` 配置**：agent-default-model 的 schema 只给了 `reasoningEffort`，`temperature` 是写死在代码里的。而桥接自己调 `sessions.selectModel()` 也只能传 provider / model / effort。
+
+绕法是**在中间放一个本地代理**，让宿主的「自定义提供方」指向它：
+
+```text
+DSH ── provider: deepseek-tuning ──▶ http://127.0.0.1:8787/v1 ──▶ https://api.deepseek.com
+                                        │
+                                        └── 命中就注入 temperature / presence_penalty
+```
+
+#### 1. 注册 provider（`cordis.patch.yml`）
+
+```yaml
+- id: llm-pi-ai
+  config:
+    providers:
+      deepseek-tuning:
+        displayName: DeepSeek 调参（本地代理）
+        apiKeyEnv: DEEPSEEK_API_KEY
+        api: openai-completions
+        baseURL: http://127.0.0.1:8787/v1
+        models:
+          - id: deepseek-flash
+            name: DeepSeek V4.1 Flash（调参）
+            reasoningEfforts:      # ← 必须写这个键
+              "off":
+              low: low
+              high: high
+              max: max
+```
+
+**最容易踩的一步：档位要写 `reasoningEfforts`（map），不是 `reasoning.efforts`（数组）。**
+
+写错不会报配置错，只会让这个模型看起来「没有档位」：
+
+- 宿主模型目录里它变成 `{ "efforts": [], "defaultEffort": "" }`；
+- 真正切换时报：
+
+```text
+session/model-unavailable: provider "deepseek-tuning" model "deepseek-flash"
+  does not support reasoning effort "low"
+```
+
+而桥接每次 `selectModel` 都会带上配置里的 `reasoningEffort: "low"`，所以只要档位是空的，这条 provider **必然**切不过去。`"off"` 的值必须是 `null`（这里写空键即是）。
+
+自检一行就够：`GET /api/dsh/model` 里看这个模型 `efforts` 是不是 `[off, low, high, max]`。是空数组就还在错的那版写法上。
+
+#### 2. 代理只改「该改的那一次」
+
+代理不应该对整个请求体做全文匹配。真实事故：代理拿 `【计费时段】` 这个标记当「是 QQ 的消息」的判据，结果**主会话自己的上下文历史里也含这个词**（讨论过它），于是主会话被误注入了 `temperature: 0.85` ——日志里能看到几十万字节的请求也被 `tuned`。
+
+正确判据：**只看最后一条 user 消息**。
+
+```js
+const msgs = body.messages || []
+const lastUser = [...msgs].reverse().find(m => m.role === 'user')
+const isQQ = typeof lastUser?.content === 'string' && lastUser.content.includes('【计费时段】')
+if (isQQ) { body.temperature = 0.85; body.presence_penalty = 0.3 }
+```
+
+其余请求原样转发。要能一眼看出命中没有：每个请求写一行 `tuned` / `plain` 日志。
+
+#### 3. 代理本身要进看门狗
+
+它挂了不会报错，只是 QQ 的每条消息都在等一个连不上的端口。加进守护脚本（见 [08](08-operations-layer.md) 第四节）：
+
+```powershell
+if (-not (Test-Port 8787)) {
+  $proxy = Find-ByCmd $nodeProcs '*llm-tuning-proxy.cjs*'
+  if (-not $proxy) { Start-Hidden 'cmd.exe' '/c node tools\llm-tuning-proxy.cjs >> state\llm-proxy.out.log 2>&1' $Root }
+}
+```
+
+#### 4. 顺手发现的副作用
+
+把 `agent-default-model.provider` 改成代理 provider 之后，**所有**会话都会走代理 —— 包括工作会话、刷视频的值班会话。这通常不是你想要的：只想给 QQ 加温度，就别动 `agent-default-model`，只改桥接配置里的 `dsh.provider`。B 站插件那条路更简单，它自己就直接传 `temperature: 0.9`，根本不需要代理。
+
 ---
 
 ## 二、发图：超时不等于失败

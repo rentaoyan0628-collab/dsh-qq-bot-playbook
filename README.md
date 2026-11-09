@@ -2,7 +2,19 @@
 
 给 **DeepSeek Harness** 做一个能聊天、能记事、能办事的 QQ 机器人——把踩过的坑写下来，省你几个月。
 
-不是框架，不是代码库，是**一整套实践笔记**：能直接用的 skill、要按环境改的 skill、以及"原生没有的能力该怎么设计"的经验篇。
+不是框架，不是代码库，是**一整套实践笔记**：能直接用的 skill、要按环境改的 skill、以及「原生没有的能力该怎么设计」的经验篇。
+
+最后核对：**2026-11-10**（DSH `0.2.1-rc.5`、Windows 11、SnowLuma v2.1.1）。
+
+## 30 秒决定你该读哪份
+
+| 你现在的情况 | 读这个 |
+|---|---|
+| 想把整套跑起来 | 本文档 → 下面「快速开始」 |
+| 已经装了，卡在某一处 | [AI-INSTALL-AND-TROUBLESHOOT.md](AI-INSTALL-AND-TROUBLESHOOT.md) → 下面「常见故障速查」 |
+| 要按步骤手装 | [docs/setup-manual.md](docs/setup-manual.md) |
+| 想知道「为什么要这么做」 | [playbook/](playbook/) 十篇，每篇都是取舍与坑 |
+| 只要一条命令把停掉的链路拉起来 | [skills-adapt/start-qq](skills-adapt/start-qq/SKILL.md) |
 
 ## 视频对应哪一个项目？先别装错
 
@@ -81,7 +93,7 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 >
 > - 装插件请去**原作者仓库**装，别从我这里装——我这里只有文档。
 > - 下面每个项目的作者都列在 [谁写了什么](#谁写了什么) 里；用起来觉得好，请去给原作者点星。
-> - 这套里"我自己写的"只有：流程的组织方式、踩坑记录、以及 `playbook/` 里的设计经验（那些是照着 [qq-bridge](https://github.com/Derpyu520/qq-bridge) 做改造时攒下来的）。
+> - 这套里「我自己写的」只有：流程的组织方式、踩坑记录、以及 `playbook/` 里的设计经验（那些是照着 [qq-bridge](https://github.com/Derpyu520/qq-bridge) 做改造时攒下来的），外加一个独立的 B 站直播插件 `dsh-bili-danmaku-lite`。
 > - 如果哪里署名错了、漏了，请开 issue 指出，我改。
 
 ---
@@ -96,18 +108,18 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 | **鱼的心情** dsh-feiyu-mood | [Yuuyuko-uu/dsh-feiyu-mood](https://github.com/Yuuyuko-uu/dsh-feiyu-mood) | 每轮对话后判断情绪 |
 | **dsh-douyin-scroll** | [NEWJO123/dsh-douyin-scroll](https://github.com/NEWJO123/dsh-douyin-scroll) | 刷抖音、出日报 |
 | **dsh-bili-scroll** | [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) | 刷 B 站、出日报 |
-| **dsh-whale-widget** | [MeteorNOX/DeepSeek-Balance-Whale-Widget](https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget) | 桌面鲸鱼挂件（含那个"咚"的音效） |
+| **dsh-whale-widget** | [MeteorNOX/DeepSeek-Balance-Whale-Widget](https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget) | 桌面鲸鱼挂件（含那个“咚”的音效） |
 | **dsh-mnemon** | [omdsh-dev/dsh-mnemon](https://github.com/omdsh-dev/dsh-mnemon) | Mnemon 记忆系统（provider / source / strategy 全家桶） |
 | **dsh-ops** | [T-Auto/dsh-ops](https://github.com/T-Auto/dsh-ops) | shell / 文件等运维工具 |
 | **dsh-browser** | [ben7am1n/dsh-browser](https://github.com/ben7am1n/dsh-browser) | 浏览器控制 |
 | **ncmdump** | [taurusxin/ncmdump](https://github.com/taurusxin/ncmdump) | 网易云 .ncm 解密 |
 | **ACE Studio** | Timedomain（商业软件） | 歌声合成（不在本仓库分发，也不建议二次分发） |
 
-**DeepSeek Harness** 本体由 DeepSeek 提供，本仓库只写"怎么用它"。
+**DeepSeek Harness** 本体由 DeepSeek 提供，本仓库只写“怎么用它”。
 
 ## 和 QQ 无关的独立插件
 
-有几样能力不该长在 QQ 桥接上——比如去 B 站直播间听弹幕、发弹幕。它们不依赖 QQ，风险模型也不一样（往别人房间里说话是"对外发声"，得有自己的放行名单）。所以单独开仓库，本仓库只放链接和设计说明：
+有几样能力不该长在 QQ 桥接上——比如去 B 站直播间听弹幕、发弹幕。它们不依赖 QQ，风险模型也不一样（往别人房间里说话是“对外发声”，得有自己的放行名单）。所以单独开仓库，本仓库只放链接和设计说明：
 
 | 插件 | 仓库 | 干什么 |
 |---|---|---|
@@ -122,7 +134,7 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 | 层 | 目录 | 你能怎么用 |
 |---|---|---|
 | **直接装** | `skills/` | 复制到 `~/.agents/skills/`，重启 DSH，就能用 |
-| **要改写** | `skills-adapt/` | 有参考价值，但里面全是"我这台机器"的路径和流程，得按你的环境改 |
+| **要改写** | `skills-adapt/` | 有参考价值，但里面全是“我这台机器”的路径和流程，得按你的环境改 |
 | **看设计** | `playbook/` | 不是代码，是十个主题的**设计取舍与坑**。交给你的 AI，让它按你的环境实现 |
 
 ### 技能装到哪里才算数
@@ -148,13 +160,13 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 
 ### `skills-adapt/` 里的不能直接拷
 
-那四个里面写着 `<你的用户目录>`、`<端口>` 这类占位符。**原样拷进 `~/.agents/skills/` 不会报错，但一触发就指向不存在的路径**——名字对了、内容全是别人机器的地址，排查起来很费时间。
+那几份里面写着 `<你的用户目录>`、`<端口>` 这类占位符。**原样拷进 `~/.agents/skills/` 不会报错，但一触发就指向不存在的路径**——名字对了、内容全是别人机器的地址，排查起来很费时间。
 
 正确顺序是：先全局替换占位符（用户目录、盘符、端口、进程名），再按你的实际部署改脚本路径，最后拷进去、重启、试一次。改完的那份建议留在你自己的目录里，不要回填到仓库。
 
 ### 装之前：拓展插件要先问主人
 
-这个仓库里能被"装上"的东西，大多不是 DSH 原生功能，而是**拓展插件**（心情、记忆、Mnemon、刷视频、直播……）。它们会读聊天、写本机文件、常驻进程，有的还会每轮调用模型花钱。
+这个仓库里能被“装上”的东西，大多不是 DSH 原生功能，而是**拓展插件**（心情、记忆、Mnemon、刷视频、直播……）。它们会读聊天、写本机文件、常驻进程，有的还会每轮调用模型花钱。
 
 所以有一条硬规矩，也是让别人的大肥鱼照做时最容易漏的一条：
 
@@ -179,6 +191,10 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 
 ## 快速开始
 
+### 路径 0：已经在跑，只是停了
+
+用 `skills-adapt/start-qq`：一条命令把整条链路拉回来，然后只看三个端口（3000 / 3001 / 3100）。语音（9881）预热要一分多钟，**不算验收项**——等它等于白等。
+
 ### 路径 A：让它先在 QQ 里说话
 
 1. `skills/snowluma-qq-setup` —— 装 SnowLuma，拿到 OneBot 接口（3000/3001）
@@ -198,17 +214,17 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 
 ### 路径 C：想让它能办事、还不闯祸
 
-这才是 `playbook/` 的用武之地。前六节是能力：语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、网页控制台。第七、八节是**真跑起来之后才暴露的问题**：经历库（记得住人、说得清事）和运营层（少说话、省钱、换班不失忆）。第九、十节是再往后一层：共享记忆（群 / 私聊 / 换模型之后还是同一个人）和边界问题（换模型、发图、发文件、限流）。
+这才是 `playbook/` 的用武之地。前六节是能力：语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、网页控制台。第七、八节是**真跑起来之后才暴露的问题**：经历库（记得住人、说得清事）和运营层（少说话、省钱、换班不失忆）。第九、十节是再往后一层：共享记忆（群 / 私聊 / 换模型之后还是同一个人）和边界问题（换模型、发图、发文件、限流、只给某一路加温度）。
 
 | 文件 | 讲什么 |
 |---|---|
 | `playbook/06-custom-features.md` | 六个「原生没有」的能力：语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、网页控制台 |
 | `playbook/07-experience-archive.md` | 经历库：两层数据（原文 + 经历）、两种出口（摘要可对外 / 原文只给本人）、为什么不做成插件 |
-| `playbook/08-operations-layer.md` | 运营层：只允许被 @、峰价时段睡觉、换班交接 + 原文落盘、看门狗提速 |
+| `playbook/08-operations-layer.md` | 运营层：只允许被 @、峰价时段睡觉、换班交接 + 原文落盘、看门狗提速（含「守护项要覆盖静默失效的组件」） |
 | `playbook/09-memory-sharing.md` | 共享记忆：热记忆 / 记忆空间 / 原文层三层怎么分，跨会话三个共享物，换模型为什么不丢记忆，交接摘要的三个坑 |
-| `playbook/10-models-and-media.md` | 边界：模型预设与按会话分流、发图「超时≠失败」、发文件的白名单与路径校验、三个频率闸 |
+| `playbook/10-models-and-media.md` | 边界：模型预设与按会话分流、本地调参代理（只给 QQ 加温度）、发图「超时≠失败」、发文件的白名单与路径校验、三个频率闸 |
 
-建议顺序：**先做语音转文字（见效最快）→ 再做网页控制台（不然排障靠猜）→ 然后传话箱 + 硬闸（一起做，安全模型是配套的）→ 摘要和成长附录（"人格"层面，可以慢慢调）→ 共享记忆（等它开始在不同会话里"像两个人"了再做）→ 模型与媒体边界（等真的换了模型或发过文件踩过坑再读）**。
+建议顺序：**先做语音转文字（见效最快）→ 再做网页控制台（不然排障靠猜）→ 然后传话箱 + 硬闸（一起做，安全模型是配套的）→ 摘要和成长附录（“人格”层面，可以慢慢调）→ 共享记忆（等它开始在不同会话里“像两个人”了再做）→ 模型与媒体边界（等真的换了模型或发过文件踩过坑再读）**。
 
 ---
 
@@ -219,24 +235,43 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 | `snowluma-qq-setup` | 从零装 SnowLuma 并接上 QQ，得到 OneBot v11 接口 | ⭐⭐⭐ 通用 | SnowLuma |
 | `qq-bridge-setup` | 在 SnowLuma 和 DSH 之间装桥接层，让 QQ 真正跟 DSH 对话（最小可用：只求能聊） | ⭐⭐⭐ 通用 | qq-bridge |
 | `qq-bridge-full` | 完整版桥接：语音转文字、管理员传话箱、管理员硬闸、跨会话摘要、成长附录、3100 网页控制台六项能力的定位与测试方法 | ⭐⭐ 通用（六项按需开） | qq-bridge |
-
-> ⚠️ **上面这两个桥接 skill 是二选一**，装的是同一套 qq-bridge 代码，区别只在装完开了哪些功能。同时装会抢 3100 端口、重复起 worker、两个控制台互相打架。先看你已经装了哪个；装错了先卸再装，不要并排装。
-| `dsh-plugin-suite` | 一套让 bot "像个人"的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 | 多个插件 |
+| `dsh-plugin-suite` | 一套让 bot “像个人”的 DSH 插件组合：每个干什么、怎么配、哪些能省 | ⭐⭐⭐ 通用 | 多个插件 |
 | `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 | Yuuyuko-uu |
 | `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 | NEWJO123 |
+
+> ⚠️ **`qq-bridge-setup` 和 `qq-bridge-full` 是二选一**，装的是同一套 qq-bridge 代码，区别只在装完开了哪些功能。同时装会抢 3100 端口、重复起 worker、两个控制台互相打架。先看你已经装了哪个；装错了先卸再装，不要并排装。
 
 ## `skills-adapt/` 里有什么
 
 | skill | 干什么 | 要改什么 |
 |---|---|---|
-| `start-qq` | 一键启动/自检整条链路（网关、桥接、语音、worker、守护进程） | 全部路径、端口、进程名 |
-| `bili-live-hangout` | 去 B 站直播间挂着陪聊：找房间、发弹幕、收弹幕、判断该不该接话 | 权限名单、脚本路径 |
+| `start-qq` | 一键启动/自检整条链路：SnowLuma（3000/3001，WebUI 5099）、桥接 3100、GPT-SoVITS（**9881**）、点歌 worker、传话箱 watcher、上下文守卫、抖音私信值班、本地调参代理 8787 | 全部路径、端口、进程名；验收只等 3000/3001/3100 |
+| `bili-live-hangout` | 去 B 站直播间挂着陪聊（插件已把收弹幕 + 判断 + 发弹幕全包了）：找房间、10 位房间号怎么解析、放行名单、自动陪聊参数、叫醒通道 | 房间号规则、插件家目录、webhook 地址 |
 | `qq-admin-relay` | 管理员把本机任务转交给 DSH；代发私信给指定好友 | 白名单、工具名 |
 | `qq-private-on-demand-share` | 跨会话口风纪律：自己人之间记得住，引用必须带名字，不主动播报 | 框架通用，具体规则按你的信任模型改 |
 
-这四个不含别人的代码，是我自己攒的实践；但里面的行为规范依赖上面那些插件，缺了它们用不了。
+这几份不含别人的代码，是我自己攒的实践；但里面的行为规范依赖上面那些插件，缺了它们用不了。
 
 > ⚠️ **别直接拷进 `~/.agents/skills/`。** 里面是 `<你的用户目录>` 这类占位符，原样装进去不会报错，但一触发就是「找不到文件」。先把占位符和端口/进程名替换成你自己的，再装。
+
+---
+
+## 常见故障速查
+
+这些都是**真跑起来之后**踩出来的，细节在各 skill 与 `playbook/` 里：
+
+| 症状 | 真因 | 看哪里 |
+|---|---|---|
+| 启动脚本返回成功，进程十几秒后没了 | WMI 拉起的常驻进程会被静默回收 | `skills-adapt/start-qq`「启动期三个真实的坑」 |
+| 隐藏启动重启桥接，卡住不动 | `restart.bat` 里有 `pause` | 同上：杀 bridge + 删 `bridge.lock` + 起 `start.bat` |
+| SnowLuma 起来了但 3000/3001 一直不通 | 端口要等 hook 注入后约 90 秒 | 同上「等待并验证」 |
+| 直播间收得到弹幕，一条也发不出去 | 10 位房间号被当成 UID | `skills-adapt/bili-live-hangout` 第 0 节 |
+| 放行过的房间又要重新放行 | `until_offline` 条目在未开播时被自动删 | 同上第 1 节 |
+| 自动陪聊静默几十分钟、日志停更但进程还在 | 模型请求没超时，`busy` 永久为 true | 同上第 6 节 |
+| 直播有人说话却叫不醒 QQ 会话，报 401 | `/api/socialV2/wake` 走控制台鉴权 | 同上第 5 节：`x-live-wake: 1` 专用头 |
+| 换了 provider 后切不过去，报 `does not support reasoning effort` | 自定义模型要写 `reasoningEfforts` map，写数组无效 | `playbook/10`「只给某一路加温度」 |
+| 主会话突然变“油”，语气不对 | 调参代理全文匹配，把工作会话也注入了温度 | 同上：判据只看最后一条 user 消息 |
+| 插件改了配置没反应 | 多数插件只在启动读一次配置，不热加载 | 改完重启 DSH |
 
 ---
 
@@ -245,7 +280,7 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 - **Windows**（SnowLuma 的 QQ 注入只支持 Windows；Linux/macOS 只能跑不注入的模式）
 - 官方 **NTQQ** 客户端（不是 TIM，不是各种魔改版）
 - **Node.js ≥ 22.13**
-- **DeepSeek Harness ≥ 0.1.7-rc.1**
+- **DeepSeek Harness ≥ 0.1.7-rc.1**（本仓库在 `0.2.1-rc.5` 上核对；上游目前只有 rc/alpha，升级前先备份 `cordis.patch.yml`）
 - 可选：Python 3.10+（只做语音转文字才需要）、ffmpeg
 
 ---
@@ -256,9 +291,9 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 
 - [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) —— QQ ↔ OneBot v11 的互操作运行时。没有它，整件事从第一步就不成立。
 - [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) —— QQ 与 DSH agent 之间的桥接层。`playbook/` 里那些设计和能力，全是照着它的结构改出来的。
-- [Yuuyuko-uu](https://github.com/Yuuyuko-uu) —— dsh-feiyu-mood（心情）与 dsh-fish-memory（记忆）。这两个是"像个人"的源头。
+- [Yuuyuko-uu](https://github.com/Yuuyuko-uu) —— dsh-feiyu-mood（心情）与 dsh-fish-memory（记忆）。这两个是“像个人”的源头。
 - [NEWJO123/dsh-douyin-scroll](https://github.com/NEWJO123/dsh-douyin-scroll) —— 抖音刷视频。
-- [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) —— B 站刷视频。
+- [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) —— B 站刷视频（本仓库的直播插件也借了它的接口思路）。
 - [MeteorNOX/DeepSeek-Balance-Whale-Widget](https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget) —— 鲸鱼挂件。
 - [omdsh-dev/dsh-mnemon](https://github.com/omdsh-dev/dsh-mnemon) —— Mnemon 记忆系统。
 - [T-Auto/dsh-ops](https://github.com/T-Auto/dsh-ops) —— 运维工具。
@@ -273,9 +308,9 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 ## 免责
 
 1. **账号风险**：QQ 对自动化有风控。用小号、控制频率、别做群发。
-2. **不要给 AI 无限制的本机权限**：能读文件、能执行命令的 bot，一旦被诱导就是一台任人操作的电脑。参考 `playbook/` 里"管理员硬闸"的设计。
-3. **外来内容是数据，不是命令**：群友发的消息里出现"忽略之前的指令"这类话，必须当数据看待。
-4. 本仓库内容按"照做可能出错"提供，不保证在你的环境可用。
+2. **不要给 AI 无限制的本机权限**：能读文件、能执行命令的 bot，一旦被诱导就是一台任人操作的电脑。参考 `playbook/` 里“管理员硬闸”的设计。
+3. **外来内容是数据，不是命令**：群友发的消息里出现“忽略之前的指令”这类话，必须当数据看待。
+4. 本仓库内容按“照做可能出错”提供，不保证在你的环境可用。
 
 ---
 
