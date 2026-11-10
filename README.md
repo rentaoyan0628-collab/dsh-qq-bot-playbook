@@ -6,6 +6,17 @@
 
 最后核对：**2026-11-10**（DSH `0.2.1-rc.5`、Windows 11、SnowLuma v2.1.1）。
 
+## SnowLuma 已私密：新安装与老用户迁移请分开看
+
+**旧视频里的 SnowLuma 仓库目前已转为私密，普通读者无法按原入口下载。新安装可以用 [NapCatQQ](https://github.com/NapNeko/NapCatQQ) 替换网关，后面的 qq-bridge、DSH、白名单、人格卡与记忆配置基本沿用。** 不是换一套 bot 框架，也不用因此重装全部组件。
+
+| 你属于哪一种 | 专门教程 |
+|---|---|
+| **还没装 / 下载不到 SnowLuma** | **[新安装：用 NapCat 接上 qq-bridge 和 DSH](docs/napcat-new-install.md)**：官方下载安装、HTTP/正向 WS、token、桥接配置与文字验收 |
+| **已经装好 SnowLuma，想换 NapCat** | **[迁移：保留 bridge、人格和记忆，只换网关](docs/napcat-migration.md)**：备份、停旧守护、改端点、核对 worker、分项验收和回滚 |
+
+已有 SnowLuma 仍能用时**不必强制迁移**。NapCat 同样提供 OneBot v11，但管理页、配置格式、网关发现/自愈和启动脚本不能直接照搬；媒体与扩展工具须逐项验收。**本次更新是官方资料与静态代码核对后的配置方案，尚未完成 NapCat 端到端实测，不宣称全功能无缝兼容。** 后文保留 SnowLuma 的历史视频与本机实测记录，遇到网关相关步骤以这两篇为准。
+
 ## 30 秒决定你该读哪份
 
 | 你现在的情况 | 读这个 |
@@ -59,7 +70,7 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 
 所以：**「插件装不上」不等于「本教程的桥装不上」**。本教程这条路是独立进程，DSH 升到 0.2.x 照常跑；两者的失败点不在同一层，别把插件的兼容问题记到这条路线上。
 
-本教程固定使用 **SnowLuma**，不推荐改用 NapCat 复现：两套都提供 OneBot v11，但本仓库的安装步骤、白名单、3100 控制台与排障全部按 SnowLuma 写，换实现等于换掉一半环境，出了问题无法按本文档定位。
+**网关更新：**旧视频使用 SnowLuma；现在提供 [NapCat 新安装](docs/napcat-new-install.md) 与 [已有安装迁移](docs/napcat-migration.md)。这只替换 OneBot 网关，不改变本教程采用的独立 qq-bridge 路线。
 
 确实想走「插件式直连」的话：等作者发布兼容 0.2.x 的版本，或自行去掉它的客户端半部（host-only：删掉 `dsh.client` 与 `peerDependencies`，只用 `cordis.patch.yml` 配置，代价是没有 Web 设置页）。那属于另一个项目的改动，不在本仓库范围内。
 
@@ -71,7 +82,7 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 
 ```text
 请读取 https://github.com/rentaoyan0628-collab/dsh-qq-bot-playbook
-先看 README.md 和 AI-INSTALL-AND-TROUBLESHOOT.md。
+先看 README.md 和 AI-INSTALL-AND-TROUBLESHOOT.md，新安装再读 docs/napcat-new-install.md；已有 SnowLuma 要迁移则读 docs/napcat-migration.md。
 按视频的 qq-bridge 路线，从 https://github.com/Derpyu520/qq-bridge 获取桥接代码；不要自动替换为 dsh-channel-qq 或其二开版。
 根据我的电脑检查环境、安装并配置 QQ 接入，不要只解释或只读取 skill。
 保留已有能用的部分，修改前备份；需要我登录或批准权限时再问我。
@@ -102,7 +113,8 @@ QQ → SnowLuma（OneBot v11）→ qq-bridge（独立程序）→ DSH
 
 | 项目 | 作者 / 仓库 | 在本套里干什么 |
 |---|---|---|
-| **SnowLuma** | [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) | 把 QQ 转成 OneBot v11 接口（第 1 层） |
+| **NapCatQQ** | [NapNeko/NapCatQQ](https://github.com/NapNeko/NapCatQQ) | 新安装/迁移可选的 OneBot v11 网关（第 1 层，见两篇新教程） |
+| **SnowLuma** | [SnowLuma/SnowLuma](https://github.com/SnowLuma/SnowLuma) | 旧视频使用的 OneBot v11 网关；仓库现已私密 |
 | **qq-bridge** | [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) | SnowLuma ↔ DSH 的桥接层（第 2 层） |
 | **鱼的记忆** dsh-fish-memory | [Yuuyuko-uu/dsh-fish-memory](https://github.com/Yuuyuko-uu/dsh-fish-memory) | 会淡忘的长期记忆 |
 | **鱼的心情** dsh-feiyu-mood | [Yuuyuko-uu/dsh-feiyu-mood](https://github.com/Yuuyuko-uu/dsh-feiyu-mood) | 每轮对话后判断情绪 |
@@ -193,14 +205,16 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 
 ### 路径 0：已经在跑，只是停了
 
+如果已换 NapCat，先按 [迁移篇](docs/napcat-migration.md) 适配守护；不要直接执行会硬编码重拉 SnowLuma 的旧启动脚本。
+
 用 `skills-adapt/start-qq`：一条命令把整条链路拉回来，然后只看三个端口（3000 / 3001 / 3100）。语音（9881）预热要一分多钟，**不算验收项**——等它等于白等。
 
 ### 路径 A：让它先在 QQ 里说话
 
-1. `skills/snowluma-qq-setup` —— 装 SnowLuma，拿到 OneBot 接口（3000/3001）
+1. [NapCat 新安装教程](docs/napcat-new-install.md) —— 新用户用 NapCat 配 OneBot HTTP/正向 WS；旧的 `skills/snowluma-qq-setup` 留作历史安装参考
 2. `skills/qq-bridge-setup` —— 装桥接，把它接到 DSH 上（最小可用版）
    - 想直接要完整版（语音转文字、传话箱、管理员硬闸、跨会话摘要、成长附录、3100 控制台）：读 `skills/qq-bridge-full`，两版共用同一套代码，区别在装完开了哪些功能
-3. 在 QQ 里说一句，有回复 → 完事
+3. 按 [文字验收步骤](docs/napcat-new-install.md#5-分层验收http-通不等于能聊天) 核对账号、入站/出站、至少两轮问答、无重复回复与白名单权限；没测的功能标为未验
 
 桥接这一层不是装饰：本包只覆盖这条路（不做直连），后面几步——记忆、情绪、六项能力——全部长在它上面。
 
@@ -239,7 +253,7 @@ macOS/Linux:  ~/.agents/skills/<技能名>/SKILL.md
 | `fish-plugins-setup` | 「鱼的心情」（情绪）+「鱼的记忆」（会淡忘的长期记忆） | ⭐⭐⭐ 通用 | Yuuyuko-uu |
 | `douyin-scroll-setup` | 抖音刷视频插件：装依赖、登录、跑第一轮、出日报 | ⭐⭐ 通用 | NEWJO123 |
 
-> ⚠️ **`qq-bridge-setup` 和 `qq-bridge-full` 是二选一**，装的是同一套 qq-bridge 代码，区别只在装完开了哪些功能。同时装会抢 3100 端口、重复起 worker、两个控制台互相打架。先看你已经装了哪个；装错了先卸再装，不要并排装。
+> ⚠️ **`qq-bridge-setup` 和 `qq-bridge-full` 是同一套程序的两份说明，可按需阅读，不是两个插件。** 复制两份 skill 本身不会启动两个 bridge；真正要避免的是重复部署/启动第二套 bridge 和 worker。已有可用部署请保留并按需配置，不为切换说明而卸载重装。
 
 ## `skills-adapt/` 里有什么
 

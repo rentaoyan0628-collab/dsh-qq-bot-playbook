@@ -50,7 +50,7 @@ DandanLLab/dsh-channel-qq 是插件式通道，Aegink/dsh-channel-qq 是其早�
 2. 只有在插件路线下，才用 `plugin_manager list_plugins` 看 `fiberPhase` 是否 `failed`，再读诊断原文；
 3. 不要因为插件报错就判断 OneBot、SnowLuma 或 3001 端口坏了——那是三层不同的东西。
 
-本教程固定使用 SnowLuma，不推荐改用 NapCat 复现：两者都提供 OneBot v11，但白名单、3100 控制台、令牌与排障步骤均按 SnowLuma 落地，换实现等于换掉一半环境，出问题无法按本文档定位。
+**2026-11-10 网关更新：**SnowLuma 仓库已私密，新安装按 [NapCat 新安装](docs/napcat-new-install.md)，已有安装主动选择迁移时按 [NapCat 迁移](docs/napcat-migration.md)。只换网关，不改独立 qq-bridge 路线；历史字段仍叫 snowluma。先处理旧发现、自愈、守护与凭证来源，媒体逐项验收；本文未声称 NapCat 已端到端实测。
 
 ## 1. 给执行安装的大肥鱼：先检查，再按环境安装
 
@@ -59,7 +59,7 @@ DandanLLab/dsh-channel-qq 是插件式通道，Aegink/dsh-channel-qq 是其早�
 3. 查已有组件、进程、监听端口和配置位置，记录可工作的部分。不要照抄作者电脑路径，不以视频里的端口代替现场发现。
 4. 检查所选组件当前官方依赖与版本要求。优先已有/组件自带运行时；确需额外下载、安装系统依赖时说明用途和影响。不要笼统承诺无需 Node 或 Python。
 5. 修改前备份相关配置，密钥留在本机，输出脱敏。不要杀未知进程、清除会话和记忆或覆盖用户改动。
-6. 按 [SnowLuma skill](skills/snowluma-qq-setup/SKILL.md) 完成网关，按 [桥接 skill](skills/qq-bridge-setup/SKILL.md) 完成桥接（要语音转文字、传话箱、跨会话摘要、3100 控制台这些再按 [完整版 skill](skills/qq-bridge-full/SKILL.md) 开）；阅读 skill 不等于安装。每一步保存真实执行结果。
+6. 新安装按 [NapCat 教程](docs/napcat-new-install.md) 完成网关；已有 SnowLuma 保留可用部分，选择替换时先读 [迁移篇](docs/napcat-migration.md)。然后按 [桥接 skill](skills/qq-bridge-setup/SKILL.md) 完成桥接（要语音转文字、传话箱、跨会话摘要、3100 控制台这些再按 [完整版 skill](skills/qq-bridge-full/SKILL.md) 开）；阅读 skill 不等于安装。每一步保存真实执行结果。
 7. 配置已授权的 QQ 号、群号与管理员；不要默认全放行。需要扫码由用户自己操作，禁止代替用户通过身份验证。
 8. 先验收文字链路，额外心情、记忆、刷视频等按需求逐项装，不默认全装。需重启时说明原因，影响现有任务前征求同意。
 

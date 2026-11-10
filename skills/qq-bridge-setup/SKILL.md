@@ -5,7 +5,7 @@ description: 在 SnowLuma 和 DeepSeek Harness 之间装一层 qq-bridge，把�
 
 # 上桥：把 DSH 接到 QQ 上
 
-> ⚠️ **和 `qq-bridge-full` 是二选一，不是两个插件。** 两者装的是同一套 qq-bridge 代码，区别只在装完开了哪些功能。同时装会抢 3100 端口、重复起 worker、两个控制台互相打架 —— 装之前先确认你已经装过哪个，装错了先卸再装，别并排装。
+> ⚠️ **本技能与另一份桥接技能讲的是同一套 qq-bridge 程序，不是两个插件。** 两份说明可按需阅读；复制 skill 不会自己起第二个服务。不要重复部署或启动 bridge/worker；已有可用安装保留并按需配置，不为换说明卸载重装。
 
 要语音转文字 / 传话箱 / 跨会话摘要 / 3100 控制台就直接读 `qq-bridge-full`（内容更全，安装步骤一致），不要两份都装。
 
@@ -32,7 +32,7 @@ description: 在 SnowLuma 和 DeepSeek Harness 之间装一层 qq-bridge，把�
 
 [TomoyoNatsume/dsh-qq-bridge](https://github.com/TomoyoNatsume/dsh-qq-bridge)（npm `@yachangchang/dsh-qq-bridge`）是**另一个项目**：DSH 插件，不是本教程的独立桥接程序。截至 2026-11-01，它在 DSH `0.2.1-rc.5` 上激活失败，原因是它自己的 `peerDependencies` 锁在 `^0.1.0-rc.8`，且客户端半部要 `@deepseek-ai/dsh-client-runtime` 与客户端服务 `connection`/`remote`/`settingsScope`——这些在 0.2.1 已被移除；它的宿主服务在 0.2.1 都还在。
 
-结论：那是一个插件的客户端兼容问题，与 OneBot 协议、SnowLuma、3001 端口都无关，也不影响本技能这条独立进程路线（它不经过 DSH 插件系统）。本技能固定按 **SnowLuma** 写，不推荐换 NapCat 复现——两套都提供 OneBot v11，但白名单、3100 控制台与排障步骤全按 SnowLuma 落地，换实现等于换掉一半环境。
+结论：那是一个插件的客户端兼容问题，与 OneBot 协议、SnowLuma、3001 端口都无关，也不影响本技能这条独立进程路线（它不经过 DSH 插件系统）。**网关更新：**SnowLuma 仓库已私密；新装参考 [NapCat 新安装](../../docs/napcat-new-install.md)，已有安装参考 [迁移篇](../../docs/napcat-migration.md)。桥接/DSH 部分基本沿用，旧网关启动与发现逻辑必须调整，扩展能力按实际测试结果确认。
 
 ## 前置
 

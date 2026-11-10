@@ -11,6 +11,8 @@
 
 > **先确认没有装错项目：**本视频采用 [Derpyu520/qq-bridge](https://github.com/Derpyu520/qq-bridge) 独立桥接及其本机定制，不是 DandanLLab/dsh-channel-qq 或 Aegink 的 channel 二开版。即使都用 SnowLuma，也不是可直接互换的安装包。请先读 [项目辨别说明](../README.md#视频对应哪一个项目先别装错)；不要让 AI 自动改换路线，已有能用的系统先保留。
 
+> **2026-11-10 更新：**SnowLuma 仓库已私密，新用户先读 [NapCat 新安装](napcat-new-install.md)，老用户选择更换时读 [迁移篇](napcat-migration.md)。本文的 SnowLuma 下载、WebUI、配置与启动步骤保留作历史参考，不要用来配置 NapCat；后续 bridge / DSH / 人格 / 记忆步骤基本沿用。尚未完成 NapCat 端到端实测。
+
 ## 0. 这份文档解决什么
 
 你可能遇到这几种情况：

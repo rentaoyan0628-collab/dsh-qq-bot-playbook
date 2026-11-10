@@ -5,6 +5,8 @@ description: 从零把 SnowLuma 装起来并接上 QQ，得到一个可用的 On
 
 # SnowLuma 接入 QQ：从下载到能收发消息
 
+> **历史参考（2026-11-10）：**SnowLuma 仓库目前已私密。新安装改读 [NapCat 新安装](../../docs/napcat-new-install.md)，已有安装选择更换时读 [迁移篇](../../docs/napcat-migration.md)。不要从未知搬运站补包，不因仓库不可访问重装可用组件。下文是旧 SnowLuma 流程，不适用于 NapCat 配置文件。
+
 ## 0. 先搞清楚它是什么
 
 SnowLuma 是**跑在本机**的 QQ 互操作运行时。它把 QQ 的原生会话，翻译成 **[OneBot v11](https://github.com/botuniverse/onebot-11)** 标准的 HTTP 接口和 WebSocket 事件。
